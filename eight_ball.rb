@@ -20,6 +20,17 @@ def wisdom
     puts "YOU BELIEVE YOUR WISDOM GREATER THAN MINE?"
     puts "VERY WELL, WHAT WOULD YOU IMPART UPON ME?"
     add_answers
+  when "print_answers"
+    puts "ONE SUCH AS YOU CANNOT CONTAIN MY WISDOM"
+    puts "..."
+    sleep (1)
+    puts "" 
+    puts "VERY WELL" 
+    puts ""
+    puts @answers
+    puts ""
+    sleep (2)
+    wisdom
   else
     if question.include?("?")
       puts @answers.sample
@@ -39,6 +50,7 @@ def add_answers
   else
     puts "...INTERESTING."
     @answers << new_answer
+    puts ""
     wisdom
   end
 end
