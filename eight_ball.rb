@@ -4,10 +4,9 @@
   "...",
   "WHAT A CHILDISH THOUGHT...",
   "IS THAT TRULY YOUR QUESTION? I SENSE SOMETHING ELSE PERTURBING YOU.",
-  "THAT IS INSIGNIFICANT. THE VOID CALL TO YOU.",
+  "THAT IS INSIGNIFICANT. THE VOID CALLS TO YOU.",
   "PH'NGLUI MGLW'NAFH CTHULU R'LYEH WGAH'NAGL FHTAGN",
-  "YOG-SOTHOTH KNOWS THE GATE. YOG-SOTHOTH IS THE GATE. YOG-SOTHOTH IS THE KEY AND GUARDIAN OF THE GATE. PAST, PRESENT, FUTURE, ALL ARE ONE IN YOG-SOTHOTH. HE KNOWS WHERE THE OLD ONES BROKE THROUGH OF OLD, AND WHERE THEY SHALL BREAK THROUGH AGAIN.",
-  "THE OTHER GODS! THE OTHER GODS! THE GODS OF THE OUTER HELLS THAT GUARD THE FEEBLE GODS OF EARTH!... LOOK AWAY... GO BACK... DO NOT SEE! DO NOT SEE!",
+  "THE OTHER GODS! THE OTHER GODS!... LOOK AWAY... GO BACK... DO NOT SEE! DO NOT SEE!",
   "AND IF YOU GAZE LONG INTO AN ABYSS, THE ABYSS ALSO GAZES INTO YOU.",
   "TO FIND EVERYTHING PROFOUND - THAT IS AN INCONVENIENT TRAIT.",
   "AGAINST BOREDOM EVEN GODS STRUGGLE IN VAIN."
@@ -16,33 +15,57 @@
 @backupanswers = @answers.clone
 
 def wisdom
-  puts "WHAT IS YOUR QUESTION?"
-  puts "YOU MAY TELL ME 'QUIT' IF YOU WISH TO ABANDON MY WISDOM"
-  question = gets.strip
-  case question
-  when "QUIT"
+  puts "WHY DO YOU COME TO ME TODAY?"
+  puts "1) DO YOU SEEK WISDOM?"
+  puts "2) DO YOU HAVE SOME TRUTH TO TELL ME?"
+  puts "3) PERHAPS YOU HAVE ACCEPTED THAT YOUR WISDOM IS FAULTY?"
+  puts "4) OR YOU BELIEVE YOU CAN HEAR ALL MY WISDOM AT ONCE? I DO NOT RECOMMEND IT."
+  puts "5) OTHERWISE, LEAVE MY SIGHT!"
+  input = gets.to_i
+  case input
+  when 1
+    give_question
+  when 2
+    add_answers
+  when 3
+    reset_answers
+  when 4
+    print_answers
+  when 5
     puts "IS THAT YOUR WISH...?"
     sleep (3)
     puts "VERY WELL. BEGONE."
     exit
-  when "add_answers"
-    add_answers
-  when "print_answers"
-    print_answers
-  when "reset_answers"
-    reset_answers
   else
-    if question.include?("?")
-      puts @answers.sample
-      wisdom
-    else
-      puts "I REQUIRE A QUESTION, NOT A STATEMENT."
-      wisdom
-    end
+    puts "I DO NOT TAKE INSTRUCTIONS. CHOOSE FROM MY OPTIONS."
+    wisdom
+  end
+end
+
+def give_question
+  puts "WHAT DO YOU WISH TO ASK?"
+  puts "YOU MAY TELL ME 'QUIT' IF YOU NO LONGER HAVE A QUESTION"
+  question = gets.strip
+  if question.include?("?")
+    puts ""
+    sleep (2)
+    puts @answers.sample
+    puts ""
+    give_question
+  elsif question == "QUIT"
+    puts "WISDOM IS NOT FOR EVERYONE."
+    puts ""
+    wisdom
+  else
+    puts ""
+    puts "THAT IS NOT A QUESTION. I DO NOT SUFFER TRITE STATMENTS."
+    puts ""
+    give_question
   end
 end
 
 def add_answers
+  puts ""
   puts "YOU BELIEVE YOUR WISDOM GREATER THAN MINE?"
   puts "VERY WELL, WHAT WOULD YOU IMPART UPON ME?"
   new_answer = gets.strip
