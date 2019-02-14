@@ -10,16 +10,35 @@ def wisdom
   puts "WHAT IS YOUR QUESTION?"
   puts "YOU MAY TELL ME 'QUIT' IF YOU WISH TO ABANDON MY WISDOM"
   question = gets.strip
-  if question == "QUIT"
+  case question
+  when "QUIT"
     puts "IS THAT YOUR WISH...?"
     sleep (3)
     puts "VERY WELL. BEGONE."
     exit
-  elsif question.include? "?"
-    puts @answers.sample
+  when "add_answers"
+    puts "YOU BELIEVE YOUR WISDOM GREATER THAN MINE?"
+    puts "VERY WELL, WHAT WOULD YOU IMPART UPON ME?"
+    add_answers
+  else
+    if question.include?("?")
+      puts @answers.sample
+      wisdom
+    else
+      puts "I REQUIRE A QUESTION, NOT A STATEMENT."
+      wisdom
+    end
+  end
+end
+
+def add_answers
+  new_answer = gets.strip
+  if @answers.include?(new_answer)
+    puts "THAT IS KNOWN TO ME."
     wisdom
   else
-    puts "I REQUIRE A QUESTION, NOT A STATEMENT."
+    puts "...INTERESTING."
+    @answers << new_answer
     wisdom
   end
 end
